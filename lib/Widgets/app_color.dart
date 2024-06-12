@@ -68,6 +68,9 @@ class AppColor {
   static final Color categoryContainer = ('#E9E9E9').toColor();
   static final Color searchTextField = ('#F6F6F6').toColor();
   static final Color cartBoxButtons = ('#EFEFEF').toColor();
+  static final Color innerAlignment  = ('#DEB888').toColor();
+
+
 
 
 
