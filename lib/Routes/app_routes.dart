@@ -1,8 +1,10 @@
 
 
+import 'package:donationdiversity/signUp/signUp.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import '../Login/login_bining.dart';
 import '../Login/login_view.dart';
+import '../signUp/signUpBinding.dart';
 
 
 class AppRoutes {
@@ -23,8 +25,8 @@ class AppRoutes {
     ),
     GetPage(
       name: signUpRoute,
-      page: () =>  const LoginView(),
-      bindings: [LoginBinding()],
+      page: () =>  const SignUpView(),
+      bindings: [SignBinding()],
     ),
 
 

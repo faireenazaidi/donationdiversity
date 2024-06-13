@@ -69,6 +69,8 @@ class AppColor {
   static final Color searchTextField = ('#F6F6F6').toColor();
   static final Color cartBoxButtons = ('#EFEFEF').toColor();
   static final Color innerAlignment  = ('#DEB888').toColor();
+  static final Color buttonColor  = ('#DDB887').toColor();
+  static const Color amberColor  = Colors.amberAccent;
 
 
 

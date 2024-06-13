@@ -1,17 +1,18 @@
-import 'dart:ui';
 
 import 'package:donationdiversity/Routes/app_routes.dart';
-import 'package:donationdiversity/Widgets/hex_color_extention.dart';
 import 'package:donationdiversity/Widgets/text_theme.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../Widgets/app_color.dart';
+import '../Widgets/myButton.dart';
 import '../Widgets/primary_text_field.dart';
 import 'login_controller.dart';
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     Color myColor=Colors.black.withOpacity(0.2);
@@ -19,139 +20,155 @@ class LoginView extends GetView<LoginController> {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           height: Get.height,width: Get.width,
           decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/bg.png'),
-                fit: BoxFit.cover,
-
+                fit: BoxFit.fitHeight,
               )
           ),
-      
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: HexColor('#DDB887')),
-                    borderRadius: BorderRadius.circular (15),
+
+
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 30.0,left: 8.0,right: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: HexColor('DDB887')),
+                      borderRadius: BorderRadius.circular (15),
+                    ),
+
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+
+                        child: Image.asset("assets/ddlogo.png",height: 135,)),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+
+                  Text("Login",style: MyTextTheme.veryLargeWCB,),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  PrimaryTextField(
+                    prefixIcon: Icon(Icons.phone_android_rounded),
+                      hintText: "Enter mobile number",
+                    backgroundColor: Colors.white,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+
+                  PrimaryTextField(
+                      prefixIcon: Icon(Icons.lock_outline_rounded),
+                      hintText: "Enter password",
 
 
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                      child: Image.asset("assets/ddlogo.png",height: 150,)),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
 
-                Text("Login",style: TextStyle(fontSize: 24,color: Colors.white),),
-                SizedBox(
-                  height: 20,
-                ),
-                PrimaryTextField(
-                  prefixIcon: Icon(Icons.phone_android_rounded),
-                    hintText: "Enter mobile number",
-                  backgroundColor: Colors.white,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-
-                PrimaryTextField(
-                    prefixIcon: Icon(Icons.lock_outline_rounded),
-                    hintText: "Enter password",
-
-
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Checkbox(
-                      checkColor: Colors.green,
-                      activeColor: Colors.transparent,
-                      value: false, onChanged:(value) {
-
-                      },
-
-                    ),
-                    Text("Remember me",style: MyTextTheme.mediumBCN,),
-                    SizedBox(
-                      width: 80,
-                    ),
-                    Text("Forgot Password?",style: MyTextTheme.mediumBCN)
-                  ],
-                ),
-
-                SizedBox(
-                  height: 10,
-                ),
-
-                ElevatedButton(
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('SignIn',style: MyTextTheme.mediumBCN,),
-                      SizedBox(
-                        width: 10,
+                      Checkbox(
+                        checkColor: Colors.green,
+                        activeColor: Colors.transparent,
+                        value: false, onChanged:(bool?value) {
+                        },
                       ),
-                      Icon(Icons.arrow_forward),
+                      Text("Remember me",style: MyTextTheme.mediumBCN,),
+                      SizedBox(
+                        width: 85,
+                      ),
+                      Text("Forgot Password?",style: MyTextTheme.mediumBCN)
                     ],
                   ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
 
-                    )
-
+                  SizedBox(
+                    height: 20,
                   ),
-                  onPressed: () {},
 
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                    children: <Widget>[
-                      Expanded(
-                          child: Divider(
-                            color: Colors.white,
-                            indent: 80,
-                            thickness: 0.3,
-                          )
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
+                MyButton(
+                  borderRadius: 10,
+                  elevation: 2,
+                  width: 353,
+                  onPressed: (){}, title: "SIgn in",
+                color: AppColor.buttonColor,suffixIcon: Icon(Icons.arrow_forward,color: Colors.white,),),
 
-                      Text("or",style: MyTextTheme.mediumBCN,),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                      children: <Widget>[
+                        Expanded(
+                            child: Divider(
+                              color: Colors.white,
+                              indent: 80,
+                              endIndent: 1,
+                              thickness: 0.6,
+                            )
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
 
-                      Expanded(
-                          child: Divider(
-                            color: Colors.white,
-                            endIndent: 80,
-                            thickness: 0.3,
-                          )
+                        Text("or",style: MyTextTheme.mediumBCN,),
+
+                        Expanded(
+                            child: Divider(
+                              color: Colors.white,
+                              endIndent: 80,
+                              indent: 10,
+                              thickness: 0.6,
+                            )
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 10,),
+                  Text("Login with OTP",style: MyTextTheme.largeWCB,),
+                  SizedBox(
+                    height: 10,
+                  ),
+                RichText(
+                      text: TextSpan(
+                        children: [
+              TextSpan(
+                text: "If you don't have an account registered,",
+                style:MyTextTheme.mediumBCN
+              ),
+
+              TextSpan(
+                text: "you can",style: MyTextTheme.mediumBCN
+              ),
+              TextSpan(
+                text: " Register here!",
+                style: MyTextTheme.largeBCB,
+
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                  Get.toNamed(AppRoutes.signUpRoute);
+
+                    // Navigate to registration screen or perform action
+                  },
+              ),
+                ],
+              ),
+                        ),
+                        ]
                       ),
-                    ]
-                ),
-                SizedBox(height: 10,),
-                Text("Login with OTP",style: MyTextTheme.largeBCB,),
-                SizedBox(
-                  height: 10,
-                ),
-                Text("If you don't have an account registered,",style: MyTextTheme.mediumBCN,),
-                Text("you can",style: MyTextTheme.mediumBCN,)
-              ],
             ),
           ),
-        )
-      ),
+            )
+      )
     );
   }
 }
+

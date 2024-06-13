@@ -43,7 +43,7 @@ class MyTextTheme  {
       fontWeight: FontWeight.normal
   );
   static TextStyle largePCN=GoogleFonts.roboto(
-      color: AppColor.primaryColorLight,
+      color: AppColor.pink,
       fontSize: 18,
       fontWeight: FontWeight.normal
   );
@@ -101,11 +101,11 @@ class MyTextTheme  {
       fontWeight: FontWeight.normal
   );
   static TextStyle veryLargeWCB=GoogleFonts.roboto(
-      color: AppColor.white,
+      color: AppColor.buttonColor,
       fontSize: 22,
       fontWeight: FontWeight.bold
   );static TextStyle largeWCB=GoogleFonts.roboto(
-      color: AppColor.white,
+      color: AppColor.buttonColor,
       fontSize: 18,
       fontWeight: FontWeight.bold
   );
@@ -145,7 +145,7 @@ class MyTextTheme  {
       fontWeight: FontWeight.bold
   );
   static TextStyle largeBCB=GoogleFonts.roboto(
-      color: AppColor.black,
+      color: AppColor.buttonColor,
       fontSize: 20,
       fontWeight: FontWeight.bold
   );
@@ -298,3 +298,5 @@ class MyTextTheme  {
 
 
 }
+
+

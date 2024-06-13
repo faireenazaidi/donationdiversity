@@ -78,6 +78,7 @@ class PrimaryTextField extends StatelessWidget {
           decoration: decoration??InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             filled: true,
+            fillColor: Colors.white,
             isDense: true,
             // fillColor: (enabled??true)?
             // backgroundColor??
@@ -113,7 +114,7 @@ class PrimaryTextField extends StatelessWidget {
             suffixIcon:  suffixIcon,
 
             focusedBorder:  border??OutlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(PrimaryTextFieldUtil.border)),
               borderSide: BorderSide(
                   color: borderColor??PrimaryTextFieldUtil.borderColor,
                   width: 1
