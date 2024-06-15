@@ -139,11 +139,6 @@ class LoginView extends GetView<LoginController> {
                                 ),
                               ]
                           ),
-                          SizedBox(height: 10,),
-                          Text("Login with OTP", style: MyTextTheme.largeWCB,),
-                          SizedBox(
-                            height: 10,
-                          ),
                           RichText(
                             text: TextSpan(
                               children: [
