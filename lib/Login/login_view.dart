@@ -12,7 +12,7 @@ import 'login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
-  
+
   // Getter for _isChecked
 
     @override
@@ -56,7 +56,7 @@ class LoginView extends GetView<LoginController> {
                             height: 30,
                           ),
 
-                          Text("Login", style: MyTextTheme.veryLargeWCB,),
+                          Text("Login", style: MyTextTheme.veryLargeWCN,),
                           SizedBox(
                             height: 30,
                           ),
@@ -72,7 +72,6 @@ class LoginView extends GetView<LoginController> {
                           PrimaryTextField(
                             prefixIcon: Icon(Icons.lock_outline_rounded),
                             hintText: "Enter password",
-
 
                           ),
                           SizedBox(

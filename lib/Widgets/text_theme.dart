@@ -150,9 +150,14 @@ class MyTextTheme  {
       fontWeight: FontWeight.bold
   );
   static TextStyle mediumBCB=GoogleFonts.roboto(
-      color: AppColor.black,
+      color: AppColor.buttonColor,
       fontSize: 14,
-      fontWeight: FontWeight.bold
+      fontWeight: FontWeight.normal
+  );
+  static TextStyle mediumBCG=GoogleFonts.roboto(
+      color: AppColor.greyColor,
+      fontSize: 14,
+      fontWeight: FontWeight.normal
   );
   static TextStyle mediumBCC=GoogleFonts.roboto(
       color: AppColor.black,
@@ -176,9 +181,9 @@ class MyTextTheme  {
       fontWeight: FontWeight.normal
   );
   static TextStyle mediumBCN=GoogleFonts.roboto(
-      color: AppColor.white,
+      color: AppColor.black,
       fontSize: 16,
-      fontWeight: FontWeight.normal
+      fontWeight: FontWeight.w300
   );
   static TextStyle mediumGCB=GoogleFonts.roboto(
       color: AppColor.greyDark,

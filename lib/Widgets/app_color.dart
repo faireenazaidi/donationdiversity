@@ -71,6 +71,8 @@ class AppColor {
   static final Color innerAlignment  = ('#DEB888').toColor();
   static final Color buttonColor  = ('#DDB887').toColor();
   static const Color amberColor  = Colors.amberAccent;
+  static const Color greyColor  = Colors.grey;
+
 
 
 
