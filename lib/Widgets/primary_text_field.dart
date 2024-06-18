@@ -76,6 +76,10 @@ class PrimaryTextField extends StatelessWidget {
 
           // style:  MyTextTheme().mediumBCN,
           decoration: decoration??InputDecoration(
+            constraints: BoxConstraints(
+              maxHeight: 50,
+              minHeight: 40
+            ),
             floatingLabelBehavior: FloatingLabelBehavior.always,
             filled: true,
             fillColor: Colors.white,

@@ -105,7 +105,7 @@ class MyTextTheme  {
       fontSize: 22,
       fontWeight: FontWeight.bold
   );static TextStyle largeWCB=GoogleFonts.roboto(
-      color: AppColor.buttonColor,
+      color: AppColor.white,
       fontSize: 18,
       fontWeight: FontWeight.bold
   );
@@ -122,7 +122,7 @@ class MyTextTheme  {
   static TextStyle veryLargeWCN=GoogleFonts.roboto(
       color: AppColor.white,
       fontSize: 22,
-      fontWeight: FontWeight.normal
+      fontWeight: FontWeight.bold
   );
   static TextStyle largeWCN=GoogleFonts.roboto(
       color: AppColor.white,
@@ -181,7 +181,7 @@ class MyTextTheme  {
       fontWeight: FontWeight.normal
   );
   static TextStyle mediumBCN=GoogleFonts.roboto(
-      color: AppColor.black,
+      color: AppColor.white,
       fontSize: 16,
       fontWeight: FontWeight.w300
   );

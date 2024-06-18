@@ -88,7 +88,9 @@ class SignUpView extends GetView<SignUpController>{
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             DropdownButton<String>(
-                                value: countryCode,items: <String>['+91','+1','+44','+61'].map((String value) {
+                              underline: SizedBox(),
+                                value: countryCode,
+                                items: <String>['+91','+1','+44','+61'].map((String value) {
                                   return DropdownMenuItem<String>(
                                       value:value,
                                       child: Text(value),);
@@ -98,6 +100,9 @@ class SignUpView extends GetView<SignUpController>{
                                   });
                             }),
                             Expanded(child: TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(borderSide: BorderSide.none)
+                              ),
                               keyboardType: TextInputType.phone,
                             )),
                           ],
