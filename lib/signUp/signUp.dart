@@ -8,6 +8,7 @@ import 'package:hexcolor/hexcolor.dart';
 import '../Routes/app_routes.dart';
 import '../Widgets/app_color.dart';
 import '../Widgets/myButton.dart';
+import '../Widgets/primary_text_field.dart';
 import '../Widgets/text_theme.dart';
 
 class SignUpView extends GetView<SignUpController>{
@@ -19,138 +20,156 @@ class SignUpView extends GetView<SignUpController>{
     String countryCode="+91";
     String _selectedOption='mobile';
     // TODO: implement build
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-        height: Get.height, width: Get.width,
-        decoration: BoxDecoration(
-        image: DecorationImage(
-        image: AssetImage('assets/bg.png'),
-    fit: BoxFit.fitHeight,
-    )
-    ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(  top: 30.0, left: 8.0, right: 8.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+    return 
+      SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Stack(
+            children:[
               Container(
-              decoration: BoxDecoration(
-              border: Border.all(color: HexColor('DDB887')),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-            
-                  child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-            
-                  child: Image.asset(
-                  "assets/ddlogo.png", height: 135,)),
-                  ),
-                  SizedBox(
-                  height: 30,
-                  ),
-                    Text("Signup", style: MyTextTheme.veryLargeWCN,),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                height: Get.height, width: Get.width,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/bg.png'),
+                      fit: BoxFit.fitHeight,
+                    )
+                ),
+              ),
+              Container(
+                color: Colors.black.withOpacity(0.4),
+              ),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(  top: 30.0, left: 8.0, right: 8.0),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Radio<String>(value: 'mobile', groupValue: _selectedOption, onChanged: (value){
-                          setState(() {
-                            _selectedOption=value!;
-                          });
-                        }),
-                        Text("Mobile Number",style: MyTextTheme.mediumWCN,),
-                        Radio<String>(value: 'Email', groupValue: _selectedOption, onChanged: (value){
-                          setState(() {
-                            _selectedOption=value!;
-                          });
-                        }),
-                        Text("Email",style: MyTextTheme.mediumWCN,),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-
-                    if(!isEmail)
-                      Container(
-                        padding: EdgeInsets.all(8.0), // Adjust padding as needed
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.white), // Add border decoration if desired
-                          borderRadius: BorderRadius.circular(8.0),
-                          // Optional: Add border radius
+                        SizedBox(
+                          height: 20,
                         ),
-                        child: Row(
+                  Container(
+                  decoration: BoxDecoration(
+                  border: Border.all(color: HexColor('DDB887')),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+        
+                      child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+        
+                      child: Image.asset(
+                      "assets/ddlogo.png", height: 135,)),
+                      ),
+                      SizedBox(
+                      height: 40,
+                      ),
+                        Text("Signup", style: MyTextTheme.veryLargeWCN,),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            DropdownButton<String>(
-                              underline: SizedBox(),
-                                value: countryCode,
-                                items: <String>['+91','+1','+44','+61'].map((String value) {
-                                  return DropdownMenuItem<String>(
-                                      value:value,
-                                      child: Text(value),);
-                            }).toList(), onChanged: (newValue){
-                                  setState(() {
-                                    countryCode=newValue!;
-                                  });
+                            Radio<String>(value: 'mobile', activeColor: AppColor.buttonColor, groupValue: _selectedOption, onChanged: (value){
+                              setState(() {
+                                _selectedOption=value!;
+                              });
                             }),
-                            Expanded(child: TextField(
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderSide: BorderSide.none)
-                              ),
-                              keyboardType: TextInputType.phone,
-                            )),
+                            Text("Mobile Number",style: MyTextTheme.mediumWCN,),
+                            Radio<String>(value: 'Email', groupValue: _selectedOption, onChanged: (value){
+                              setState(() {
+                                _selectedOption=value!;
+                              });
+                            }),
+                            Text("Email",style: MyTextTheme.mediumWCN,),
                           ],
                         ),
+                        SizedBox(
+                          width: 20,
+                        ),
+        
+                        if(!isEmail)
+                          Container(
+                            padding: EdgeInsets.all(8.0), // Adjust padding as needed
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.white), // Add border decoration if desired
+                              borderRadius: BorderRadius.circular(8.0),
+                              // Optional: Add border radius
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                DropdownButton<String>(
+                                 underline: const SizedBox(),
+                                    value: countryCode,
+                                    items: <String>['+91','+1','+44','+61'].map((String value) {
+                                      return DropdownMenuItem<String>(
+                                          value:value,
+                                          child: Text(value),);
+                                }).toList(), onChanged: (newValue){
+                                      setState(() {
+                                        countryCode=newValue!;
+                                      });
+                                }),
+                                Expanded(
+                                    child: PrimaryTextField(
+                                  hintText: "Enter phone number",
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                                    constraints: BoxConstraints(
+                                      maxHeight: 10
+                                    )
+                                  ),
+                                  keyboardType: TextInputType.phone,
+                                )),
+                              ],
+                            ),
+                          ),
+                        SizedBox(
+                          height: 20,
+                        ),
+        
+                        MyButton(
+                          borderRadius: 10,
+                          elevation: 2,
+                          width: 353,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => OTPDialog(),
+                            );
+                          },
+                          title: "Send OTP",
+                          color: AppColor.buttonColor,
+                          suffixIcon: Icon(
+                            Icons.arrow_forward, color: Colors.white,),),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text("Already registered,",style: MyTextTheme.mediumWCN,),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("you can",style: MyTextTheme.mediumWCN,),
+                                TextButton(onPressed: (){}, child: Text('Login here!',style: MyTextTheme.largeBCB,)),
+                              ],
+                            ),
+                          ],
+                        )
+                      ]
                       ),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    MyButton(
-                      borderRadius: 10,
-                      elevation: 2,
-                      width: 353,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => OTPDialog(),
-                        );
-                      },
-                      title: "Send OTP",
-                      color: AppColor.buttonColor,
-                      suffixIcon: Icon(
-                        Icons.arrow_forward, color: Colors.white,),),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text("Already registered,",style: MyTextTheme.mediumWCN,),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text("you can",style: MyTextTheme.mediumWCN,),
-                            TextButton(onPressed: (){}, child: Text('Login here!',style: MyTextTheme.largeBCB,)),
-                          ],
-                        ),
-                      ],
-                    )
-                  ]
-                  ),
+                ),
+              )
+          ]
             ),
-          )
-        )
-    );
+            ),
+      );
   }
   void setState(Null Function() param0) {}
 }
@@ -204,6 +223,7 @@ class _OTPDialogState extends State<OTPDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -218,8 +238,9 @@ class _OTPDialogState extends State<OTPDialog> {
                 Text(
                   'OTP',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
+                    color: Colors.grey
                   ),
                 ),
 
@@ -246,7 +267,8 @@ class _OTPDialogState extends State<OTPDialog> {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: ('Please enter the 6 digits verification code sent to ')
+                    text: ('Please enter the 6 digits verification code sent to '),
+                    style: MyTextTheme.mediumBCG
                   ),
                   TextSpan(
                     text: "+91 8318215534",style: MyTextTheme.smallBCN
@@ -260,6 +282,7 @@ class _OTPDialogState extends State<OTPDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: List.generate(otpLength, (index) {
                 return SizedBox(
+
                   width: 40,
                   child: TextField(
                     controller: otpControllers[index],
@@ -299,7 +322,7 @@ class _OTPDialogState extends State<OTPDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Didnt'receive an OTP?",style: MyTextTheme.mediumBCN,),
+              Text("Didn't receive an OTP?",style: MyTextTheme.mediumBCb,),
             ],
           ),
                   Align(
@@ -308,7 +331,10 @@ class _OTPDialogState extends State<OTPDialog> {
                       text: TextSpan(
                           children: [
                             TextSpan(
-                                text: "Resend OTP  ",style: MyTextTheme.mediumBCG),
+                                text: "Resend OTP  ",style: MyTextTheme.mediumBCb),
+                            TextSpan(
+                                text:  "in  ",style: MyTextTheme.smallBCN),
+
                             WidgetSpan(child: Icon(Icons.access_time_outlined,size: 20,color: AppColor.buttonColor,)),
                             TextSpan(
                                 text: '  0:15 min',style: MyTextTheme.mediumBCB

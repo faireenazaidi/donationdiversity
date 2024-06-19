@@ -11,12 +11,15 @@ import '../Widgets/app_color.dart';
 import '../Widgets/myButton.dart';
 import '../Widgets/primary_text_field.dart';
 import 'login_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   // Getter for _isChecked
     @override
     Widget build(BuildContext context) {
+      bool? isChecked = false;
+
       // TODO: implement build
 
       return SafeArea(
@@ -67,22 +70,21 @@ class LoginView extends GetView<LoginController> {
 
                             Text("Login", style: MyTextTheme.veryLargeWCN,),
                             SizedBox(
-                              height: 30,
+                              height: 40,
                             ),
                             PrimaryTextField(
                               prefixIcon: Icon(Icons.phone_android_rounded),
                               hintText: "Enter mobile number",
                               backgroundColor: Colors.white,
 
-                            ),
+                              ),
                             SizedBox(
-                              height: 15,
+                              height: 20,
                             ),
 
                             PrimaryTextField(
                               prefixIcon: Icon(Icons.lock_outline_rounded),
                               hintText: "Enter password",
-
                             ),
                             SizedBox(
                               height: 20,
@@ -92,13 +94,19 @@ class LoginView extends GetView<LoginController> {
                               children: [
                                 Checkbox(
                                   checkColor: Colors.green,
-                                  activeColor: Colors.transparent,
-                                  value: false, onChanged: (bool?value) {},
+                                  activeColor: Colors.black,
+                                  value: isChecked,
+                                  onChanged: (bool? value) {
+                                    setState(()
+                                    {
+                                      isChecked = value?? false;
+                                    });
+                                },
                                 ),
                                 Text(
                                   "Remember me", style: MyTextTheme.mediumBCN,),
                                 SizedBox(
-                                  width: 85,
+                                  width: 125,
                                 ),
                                 Text("Forgot Password?",
                                     style: MyTextTheme.mediumBCN)
@@ -112,7 +120,8 @@ class LoginView extends GetView<LoginController> {
                             MyButton(
                               borderRadius: 10,
                               elevation: 2,
-                              width: 353,
+                              width: 300,
+                              height: 10,
                               onPressed: () {},
                               title: "Sign in",
                               color: AppColor.buttonColor,
@@ -127,10 +136,10 @@ class LoginView extends GetView<LoginController> {
                                   Expanded(
                                       child: Divider(
                                         color: Colors.white,
-                                        indent: 80,
+                                        indent: 120,
                                         endIndent: 1,
                                         thickness: 0.6,
-                                      )
+                                      ),
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -141,40 +150,32 @@ class LoginView extends GetView<LoginController> {
                                   Expanded(
                                       child: Divider(
                                         color: Colors.white,
-                                        endIndent: 80,
+                                        endIndent: 120,
                                         indent: 10,
                                         thickness: 0.6,
                                       )
                                   ),
                                 ]
                             ),
-                            Text("Login with OTP",style: MyTextTheme.largeBCB,),
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                      text: "If you don't have an account registered,",
-                                      style: MyTextTheme.mediumBCN
-                                  ),
-
-                                  TextSpan(
-                                      text: "you can",
-                                      style: MyTextTheme.mediumBCN
-                                  ),
-                                  TextSpan(
-                                    text: " Register here!",
-                                    style: MyTextTheme.largeBCB,
-
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        Get.toNamed(AppRoutes.signUpRoute);
-
-                                        // Navigate to registration screen or perform action
-                                      },
-                                  ),
-                                ],
-                              ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("If you don't have an account registered,", style: MyTextTheme.mediumWCN),
+                              ],
                             ),
+                            Row(
+                              children: [
+                                Text("you can ",style: MyTextTheme.mediumWCN,),
+                                TextButton(onPressed: (){
+
+                                  Get.toNamed(AppRoutes.signUpRoute);
+
+                                  // Navigate to registration screen or perform action
+                                }, child: Text("Register here!",style: MyTextTheme.largeBCB,))
+                              ],
+                            )
+
+
                           ]
                       ),
                     ),
@@ -184,5 +185,8 @@ class LoginView extends GetView<LoginController> {
           )
       );
     }
+
+  void setState(Null Function() param0) {}
+    
   }
 

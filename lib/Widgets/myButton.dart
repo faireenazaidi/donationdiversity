@@ -14,6 +14,7 @@ class MyButton extends StatelessWidget {
   final Color? color;
   final double? elevation;
   final double? borderRadius;
+  final double? height;
 
   const MyButton({super.key,
     this.elevation,
@@ -24,6 +25,7 @@ class MyButton extends StatelessWidget {
     required this.title,
     this.titleColor,
     this.width,
+    this.height,
     this.expanded=true,
     this.borderRadius,
     this.padding, this.suffixIcon,
