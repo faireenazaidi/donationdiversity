@@ -73,11 +73,10 @@ class PrimaryTextField extends StatelessWidget {
           onChanged: onChanged==null? null:(val){
             onChanged!(val);
           },
-
           // style:  MyTextTheme().mediumBCN,
           decoration: decoration??InputDecoration(
             constraints: BoxConstraints(
-              maxHeight: 50,
+              maxHeight: 60,
               minHeight: 40
             ),
             floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -16,9 +16,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   // Getter for _isChecked
+
     @override
     Widget build(BuildContext context) {
-      bool? isChecked = false;
+
 
       // TODO: implement build
 
@@ -76,7 +77,6 @@ class LoginView extends GetView<LoginController> {
                               prefixIcon: Icon(Icons.phone_android_rounded),
                               hintText: "Enter mobile number",
                               backgroundColor: Colors.white,
-
                               ),
                             SizedBox(
                               height: 20,
@@ -85,6 +85,8 @@ class LoginView extends GetView<LoginController> {
                             PrimaryTextField(
                               prefixIcon: Icon(Icons.lock_outline_rounded),
                               hintText: "Enter password",
+                              backgroundColor: Colors.white,
+
                             ),
                             SizedBox(
                               height: 20,
@@ -92,16 +94,22 @@ class LoginView extends GetView<LoginController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Checkbox(
-                                  checkColor: Colors.green,
-                                  activeColor: Colors.black,
-                                  value: isChecked,
-                                  onChanged: (bool? value) {
-                                    setState(()
-                                    {
-                                      isChecked = value?? false;
-                                    });
-                                },
+                                Obx(
+                                ()=> Checkbox(
+                                  side: BorderSide(
+                                    color: Colors.white
+                                  ),
+                                    checkColor: Colors.green,
+                                    activeColor: Colors.transparent,
+
+                                    value: controller.isChecked.value,
+                                    onChanged: (bool? value) {
+                                        controller.isChecked.value =! controller.isChecked.value;
+                                        controller.update();
+                                        print("VALUE ${value}");
+                                  },
+
+                                  ),
                                 ),
                                 Text(
                                   "Remember me", style: MyTextTheme.mediumBCN,),

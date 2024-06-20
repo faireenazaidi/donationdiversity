@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../Routes/app_routes.dart';
 import '../Widgets/app_color.dart';
 import '../Widgets/myButton.dart';
@@ -17,7 +18,6 @@ class SignUpView extends GetView<SignUpController>{
   @override
   Widget build(BuildContext context) {
     bool isEmail=false;
-    String countryCode="+91";
     String _selectedOption='mobile';
     // TODO: implement build
     return 
@@ -89,41 +89,19 @@ class SignUpView extends GetView<SignUpController>{
         
                         if(!isEmail)
                           Container(
-                            padding: EdgeInsets.all(8.0), // Adjust padding as needed
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.white), // Add border decoration if desired
-                              borderRadius: BorderRadius.circular(8.0),
-                              // Optional: Add border radius
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                DropdownButton<String>(
-                                 underline: const SizedBox(),
-                                    value: countryCode,
-                                    items: <String>['+91','+1','+44','+61'].map((String value) {
-                                      return DropdownMenuItem<String>(
-                                          value:value,
-                                          child: Text(value),);
-                                }).toList(), onChanged: (newValue){
-                                      setState(() {
-                                        countryCode=newValue!;
-                                      });
-                                }),
-                                Expanded(
-                                    child: PrimaryTextField(
-                                  hintText: "Enter phone number",
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(borderSide: BorderSide.none),
-                                    constraints: BoxConstraints(
-                                      maxHeight: 10
-                                    )
-                                  ),
-                                  keyboardType: TextInputType.phone,
-                                )),
-                              ],
-                            ),
+                            child: IntlPhoneField(
+                              decoration: InputDecoration(
+                                hintText: "Enter phone number",
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                border: InputBorder.none,
+                                counterText: ""
+                              ),
+                              initialCountryCode:'IN',
+                              onChanged:(phone){
+                                print(phone.completeNumber);
+                              }
+                            )
                           ),
                         SizedBox(
                           height: 20,
@@ -173,6 +151,7 @@ class SignUpView extends GetView<SignUpController>{
   }
   void setState(Null Function() param0) {}
 }
+
 class OTPDialog extends StatefulWidget {
   @override
   _OTPDialogState createState() => _OTPDialogState();

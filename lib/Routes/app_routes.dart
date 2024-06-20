@@ -19,8 +19,6 @@ class AppRoutes {
 
 
 
-
-
   static List<GetPage> pages = [
     GetPage(
       name: loginRoute,
