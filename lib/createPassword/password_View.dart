@@ -13,7 +13,6 @@ import '../Widgets/primary_text_field.dart';
 import '../Widgets/text_theme.dart';
 
 class PasswordView extends GetView<PasswordController> {
-  bool _isPassword=true;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -63,16 +62,17 @@ class PasswordView extends GetView<PasswordController> {
                      prefixIcon: Icon(Icons.lock_outline),
                      hintText: "Enter Password",
                      backgroundColor: Colors.white,
-                     suffixIcon: IconButton(
-                       icon: Icon(
-                           _isPassword? Icons.visibility_off: Icons.visibility,
+                     suffixIcon: Obx(
+                           ()=> IconButton(
+                         icon: Icon(
+                             controller.isPassword.value?
+                             Icons.visibility_off: Icons.visibility,
+                         ),
+                         onPressed: (){
+                             controller.isPassword.value = ! controller.isPassword.value;
+                             controller.update();
+                         },
                        ),
-                       onPressed: (){
-                         setState((){
-                           _isPassword = !_isPassword;
-                         }
-                         );
-                       },
                      ),
                    ),
                    SizedBox(
@@ -81,7 +81,7 @@ class PasswordView extends GetView<PasswordController> {
 
                    PrimaryTextField(
                      prefixIcon: Icon(Icons.lock_outline),
-                     hintText: "Repeat password",
+                     hintText: "Confirm password",
                    ),
                    SizedBox(
                      height: 20,

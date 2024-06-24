@@ -86,7 +86,6 @@ class LoginView extends GetView<LoginController> {
                               prefixIcon: Icon(Icons.lock_outline_rounded),
                               hintText: "Enter password",
                               backgroundColor: Colors.white,
-
                             ),
                             SizedBox(
                               height: 20,
@@ -97,15 +96,14 @@ class LoginView extends GetView<LoginController> {
                                 Obx(
                                 ()=> Checkbox(
                                   side: BorderSide(
-                                    color: Colors.white
+                                    color: Colors.white,
                                   ),
-                                    checkColor: Colors.green,
+                                   checkColor: Colors.green,
                                     activeColor: Colors.transparent,
-
                                     value: controller.isChecked.value,
                                     onChanged: (bool? value) {
+
                                         controller.isChecked.value =! controller.isChecked.value;
-                                        controller.update();
                                         print("VALUE ${value}");
                                   },
 
@@ -113,10 +111,8 @@ class LoginView extends GetView<LoginController> {
                                 ),
                                 Text(
                                   "Remember me", style: MyTextTheme.mediumBCN,),
-                                SizedBox(
-                                  width: 125,
-                                ),
-                                Text("Forgot Password?",
+                               Spacer(),
+                               Text("Forgot Password?",
                                     style: MyTextTheme.mediumBCN)
                               ],
                             ),
@@ -145,7 +141,7 @@ class LoginView extends GetView<LoginController> {
                                       child: Divider(
                                         color: Colors.white,
                                         indent: 120,
-                                        endIndent: 1,
+                                        endIndent: 0,
                                         thickness: 0.6,
                                       ),
                                   ),
@@ -158,7 +154,7 @@ class LoginView extends GetView<LoginController> {
                                   Expanded(
                                       child: Divider(
                                         color: Colors.white,
-                                        endIndent: 120,
+                                        endIndent: 110,
                                         indent: 10,
                                         thickness: 0.6,
                                       )
@@ -173,7 +169,7 @@ class LoginView extends GetView<LoginController> {
                             ),
                             Row(
                               children: [
-                                Text("you can ",style: MyTextTheme.mediumWCN,),
+                                Text("you can",style: MyTextTheme.mediumWCN,),
                                 TextButton(onPressed: (){
 
                                   Get.toNamed(AppRoutes.signUpRoute);

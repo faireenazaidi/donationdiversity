@@ -13,12 +13,11 @@ import '../Widgets/primary_text_field.dart';
 import '../Widgets/text_theme.dart';
 
 class SignUpView extends GetView<SignUpController>{
-  const SignUpView({super.key});
+   SignUpView({super.key});
 
+  bool isEmail=false;
   @override
   Widget build(BuildContext context) {
-    bool isEmail=false;
-    String _selectedOption='mobile';
     // TODO: implement build
     return 
       SafeArea(
@@ -66,22 +65,31 @@ class SignUpView extends GetView<SignUpController>{
                         SizedBox(
                           height: 40,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Radio<String>(value: 'mobile', activeColor: AppColor.buttonColor, groupValue: _selectedOption, onChanged: (value){
-                              setState(() {
-                                _selectedOption=value!;
-                              });
-                            }),
-                            Text("Mobile Number",style: MyTextTheme.mediumWCN,),
-                            Radio<String>(value: 'Email', groupValue: _selectedOption, onChanged: (value){
-                              setState(() {
-                                _selectedOption=value!;
-                              });
-                            }),
-                            Text("Email",style: MyTextTheme.mediumWCN,),
-                          ],
+                        Obx(
+                          ()=> Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio<String>(
+                                  value:"mobile",
+                                  activeColor: AppColor.buttonColor,
+                                  groupValue: controller.selectedOption.value,
+                                  onChanged: (String? value){
+                                  controller.selectedOption.value=value!;
+                                  controller.update();
+                              }),
+                              Text("Mobile Number",style: MyTextTheme.mediumWCN,),
+
+                              Radio<String>(
+                                  value: "email",
+                                  groupValue: controller.selectedOption.value,
+                                  activeColor: AppColor.buttonColor,
+                                  onChanged: (String? value){
+                                  controller.selectedOption.value=value!;
+                                  controller.update();
+                              }),
+                              Text("Email",style: MyTextTheme.mediumWCN,),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 20,
@@ -106,7 +114,7 @@ class SignUpView extends GetView<SignUpController>{
                         SizedBox(
                           height: 20,
                         ),
-        
+
                         MyButton(
                           borderRadius: 10,
                           elevation: 2,
@@ -201,129 +209,125 @@ class _OTPDialogState extends State<OTPDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'OTP',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey
-                  ),
-                ),
-
-                IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Stack(
-                  children: [
-                    Icon(Icons.lock),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Text.rich(
-              TextSpan(
+    return SingleChildScrollView(
+      child: Dialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextSpan(
-                    text: ('Please enter the 6 digits verification code sent to '),
-                    style: MyTextTheme.mediumBCG
-                  ),
-                  TextSpan(
-                    text: "+91 8318215534",style: MyTextTheme.smallBCN
-                  )
-                ]
-              )
-              ),
-
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(otpLength, (index) {
-                return SizedBox(
-
-                  width: 40,
-                  child: TextField(
-                    controller: otpControllers[index],
-                    focusNode: focusNodes[index],
-                    decoration: InputDecoration(
-                      border: UnderlineInputBorder(),
-                      counterText: "",
-
-                    ),
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    maxLength: 1,
-                    style: TextStyle(fontSize: 18),
-                    onChanged: (value) {
-                      handleOtpChange(value, index);
+                  IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      Navigator.of(context).pop();
                     },
                   ),
-                );
-              }),
-            ),
-            SizedBox(height: 20),
-            MyButton(
-              borderRadius: 10,
-              elevation: 2,
-              width: 353,
-              onPressed: () {
-                String otp = getOtp();
-                Get.toNamed(AppRoutes.passwordRoute);
-                // Add your submit action with the OTP value here
-                print('Entered OTP: $otp');
-              },
-              title: "Submit",
-              color: AppColor.buttonColor,
-              suffixIcon: Icon(
-                Icons.arrow_forward, color: Colors.white,),),
-            SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text("Didn't receive an OTP?",style: MyTextTheme.mediumBCb,),
-            ],
-          ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child:   RichText(
-                      text: TextSpan(
-                          children: [
-                            TextSpan(
-                                text: "Resend OTP  ",style: MyTextTheme.mediumBCb),
-                            TextSpan(
-                                text:  "in  ",style: MyTextTheme.smallBCN),
-
-                            WidgetSpan(child: Icon(Icons.access_time_outlined,size: 20,color: AppColor.buttonColor,)),
-                            TextSpan(
-                                text: '  0:15 min',style: MyTextTheme.mediumBCB
-                            )
-                          ]
-                      ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'OTP',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueGrey,
+      
                     ),
                   ),
-            SizedBox(height: 10),
-          ],
+                ],
+              ),
+      
+              SizedBox(height: 10),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: ('Please enter the 6 digits verification code sent to '),
+                      style: MyTextTheme.mediumBCG
+                    ),
+                    TextSpan(
+                      text: "+91 8318215534",style: MyTextTheme.smallBCN
+                    )
+                  ]
+                )
+                ),
+      
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(otpLength, (index) {
+                  return SizedBox(
+                    width: 40,
+                    child: TextField(
+                      controller: otpControllers[index],
+                      focusNode: focusNodes[index],
+                      decoration: InputDecoration(
+                        border: UnderlineInputBorder(
+                        ),
+                        counterText: "",
+                      ),
+      
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      maxLength: 1,
+                      cursorColor: AppColor.buttonColor,
+                      style: TextStyle(fontSize: 18),
+                      onChanged: (value) {
+                        handleOtpChange(value, index);
+                      },
+                    ),
+      
+                  );
+                }),
+              ),
+              SizedBox(height: 20),
+              MyButton(
+                borderRadius: 10,
+                elevation: 2,
+                width: 353,
+                onPressed: () {
+                  String otp = getOtp();
+                  Get.toNamed(AppRoutes.passwordRoute);
+                  // Add your submit action with the OTP value here
+                  print('Entered OTP: $otp');
+                },
+                title: "Submit",
+                color: AppColor.buttonColor,
+                suffixIcon: Icon(
+                  Icons.arrow_forward, color: Colors.white,),),
+              SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("Didn't receive an OTP?",style: MyTextTheme.mediumBCb,),
+              ],
+            ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child:   RichText(
+                        text: TextSpan(
+                            children: [
+                              TextSpan(
+                                  text: "Resend OTP  ",style: MyTextTheme.mediumBCb),
+                              TextSpan(
+                                  text:  "in  ",style: MyTextTheme.smallBCN),
+      
+                            ]
+                        ),
+                      ),
+                    ),
+              SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );

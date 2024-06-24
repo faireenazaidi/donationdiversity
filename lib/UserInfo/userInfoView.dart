@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import '../Routes/app_routes.dart';
 import '../Widgets/app_color.dart';
 import '../Widgets/text_theme.dart';
 
@@ -95,7 +96,9 @@ class UserInfoView extends GetView<UserInfoController>{
                       borderRadius: 10,
                       elevation: 2,
                       width: 300,
-                      onPressed: (){},
+                      onPressed: (){
+                        Get.toNamed(AppRoutes.dashboardRoute);
+                      },
                       title: "Submit Details",
                       color: AppColor.buttonColor,
                       suffixIcon: Icon(Icons.arrow_forward,color: Colors.white,),
