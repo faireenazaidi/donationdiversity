@@ -53,7 +53,6 @@ class PasswordView extends GetView<PasswordController> {
                    SizedBox(
                      height: 40,
                    ),
-
                    Text("Create Password", style: MyTextTheme.veryLargeWCN,),
                    SizedBox(
                      height: 30,
@@ -70,7 +69,7 @@ class PasswordView extends GetView<PasswordController> {
                          ),
                          onPressed: (){
                              controller.isPassword.value = ! controller.isPassword.value;
-                             controller.update();
+
                          },
                        ),
                      ),

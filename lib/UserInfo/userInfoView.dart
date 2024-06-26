@@ -86,7 +86,7 @@ class UserInfoView extends GetView<UserInfoController>{
                       height: 15,
                     ),
                     PrimaryTextField(
-                     prefixIcon: Icon(Icons.insert_drive_file_outlined),
+                     prefixIcon: Icon(Icons.account_box_outlined),
                       hintText: "Personal Id Number",
                     ),
                     SizedBox(
@@ -95,7 +95,6 @@ class UserInfoView extends GetView<UserInfoController>{
                     MyButton(
                       borderRadius: 10,
                       elevation: 2,
-                      width: 300,
                       onPressed: (){
                         Get.toNamed(AppRoutes.dashboardRoute);
                       },

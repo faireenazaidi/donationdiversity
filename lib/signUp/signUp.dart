@@ -1,12 +1,18 @@
+import 'dart:async';
+
 import 'package:donationdiversity/signUp/signUpController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:timer_count_down/timer_count_down.dart';
+import '../Login/login_view.dart';
 import '../Routes/app_routes.dart';
+import '../Widgets/Primarytext.dart';
 import '../Widgets/app_color.dart';
 import '../Widgets/myButton.dart';
 import '../Widgets/primary_text_field.dart';
@@ -14,7 +20,6 @@ import '../Widgets/text_theme.dart';
 
 class SignUpView extends GetView<SignUpController>{
    SignUpView({super.key});
-
   bool isEmail=false;
   @override
   Widget build(BuildContext context) {
@@ -23,137 +28,154 @@ class SignUpView extends GetView<SignUpController>{
       SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: Stack(
-            children:[
-              Container(
-                height: Get.height, width: Get.width,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/bg.png'),
-                      fit: BoxFit.fitHeight,
-                    )
-                ),
-              ),
-              Container(
-                color: Colors.black.withOpacity(0.4),
-              ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(  top: 30.0, left: 8.0, right: 8.0),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
+          body: GetBuilder(
+            init: controller,
+            builder: (_) {
+              return Stack(
+                children:[
                   Container(
-                  decoration: BoxDecoration(
-                  border: Border.all(color: HexColor('DDB887')),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-        
-                      child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-        
-                      child: Image.asset(
-                      "assets/ddlogo.png", height: 135,)),
-                      ),
-                      SizedBox(
-                      height: 40,
-                      ),
-                        Text("Signup", style: MyTextTheme.veryLargeWCN,),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Obx(
-                          ()=> Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio<String>(
-                                  value:"mobile",
-                                  activeColor: AppColor.buttonColor,
-                                  groupValue: controller.selectedOption.value,
-                                  onChanged: (String? value){
-                                  controller.selectedOption.value=value!;
-                                  controller.update();
-                              }),
-                              Text("Mobile Number",style: MyTextTheme.mediumWCN,),
-
-                              Radio<String>(
-                                  value: "email",
-                                  groupValue: controller.selectedOption.value,
-                                  activeColor: AppColor.buttonColor,
-                                  onChanged: (String? value){
-                                  controller.selectedOption.value=value!;
-                                  controller.update();
-                              }),
-                              Text("Email",style: MyTextTheme.mediumWCN,),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-        
-                        if(!isEmail)
-                          Container(
-                            child: IntlPhoneField(
-                              decoration: InputDecoration(
-                                hintText: "Enter phone number",
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                border: InputBorder.none,
-                                counterText: ""
-                              ),
-                              initialCountryCode:'IN',
-                              onChanged:(phone){
-                                print(phone.completeNumber);
-                              }
-                            )
-                          ),
-                        SizedBox(
-                          height: 20,
-                        ),
-
-                        MyButton(
-                          borderRadius: 10,
-                          elevation: 2,
-                          width: 353,
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) => OTPDialog(),
-                            );
-                          },
-                          title: "Send OTP",
-                          color: AppColor.buttonColor,
-                          suffixIcon: Icon(
-                            Icons.arrow_forward, color: Colors.white,),),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text("Already registered,",style: MyTextTheme.mediumWCN,),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text("you can",style: MyTextTheme.mediumWCN,),
-                                TextButton(onPressed: (){}, child: Text('Login here!',style: MyTextTheme.largeBCB,)),
-                              ],
-                            ),
-                          ],
+                    height: Get.height, width: Get.width,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/bg.png'),
+                          fit: BoxFit.fitHeight,
                         )
-                      ]
-                      ),
-                ),
-              )
-          ]
-            ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.black.withOpacity(0.4),
+                  ),
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(  top: 30.0, left: 8.0, right: 8.0),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 20,
+                            ),
+                      Container(
+                      decoration: BoxDecoration(
+                      border: Border.all(color: HexColor('DDB887')),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+
+                          child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+
+                          child: Image.asset(
+                          "assets/ddlogo.png", height: 135,)),
+                          ),
+                          SizedBox(
+                          height: 40,
+                          ),
+                            Text("Signup", style: MyTextTheme.veryLargeWCN,),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            Obx(
+                              ()=> Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Radio<String>(
+                                      value:"mobile",
+                                      activeColor: AppColor.buttonColor,
+                                      groupValue: controller.selectedOption.value,
+                                      onChanged: (String? value){
+                                        print(value);
+                                      controller.selectedOption.value=value!;
+                                      controller.update();
+                                  }),
+                                  Text("Mobile Number",style: MyTextTheme.mediumWCN,),
+
+                                  Radio<String>(
+                                      value: "email",
+                                      groupValue: controller.selectedOption.value,
+                                      activeColor: AppColor.buttonColor,
+                                      onChanged: (String? value){
+                                        print(value);
+                                      controller.selectedOption.value=value!;
+                                      controller.update();
+                                  }),
+                                  Text("Email",style: MyTextTheme.mediumWCN,),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                              Visibility(
+                                visible: controller.selectedOption.value=="mobile",
+
+                                child: IntlPhoneField(
+                                  decoration: const InputDecoration(
+                                    hintText: "Enter Phone Number",
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                    border: InputBorder.none,
+                                    counterText: "",
+                                  ),
+
+                                  initialCountryCode:'IN',
+                                  onChanged:(phone){
+                                    print(phone.completeNumber);
+                                  }
+                                ),
+                              ),
+
+                            Visibility(
+                              visible: controller.selectedOption.value=="email",
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.email_outlined,color: AppColor.buttonColor,),
+                                    hintText: "Enter Your Email ",
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: InputBorder.none,
+                                    counterText: ""
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+
+                            MyButton(
+                              borderRadius: 10,
+                              elevation: 2,
+                              width: 353,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => OTPDialog(),
+                                );
+                              },
+                              title: "Send OTP",
+                              color: AppColor.buttonColor,
+                              suffixIcon: Icon(
+                                Icons.arrow_forward, color: Colors.white,),),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                                child: Text("Have an account,",style: MyTextTheme.mediumWCN,)),
+                            Align(
+                              alignment: Alignment.topLeft,
+                               child:  InkWell(
+                                 onTap: (){
+                                   Get.back();
+                                 },
+                                   child: Text('Login here!',style: MyTextTheme.largeBCB,))
+                            )
+                          ]
+                          ),
+                    ),
+                  )
+              ]
+                );
+            }
+          ),
             ),
       );
   }
@@ -166,9 +188,11 @@ class OTPDialog extends StatefulWidget {
 }
 
 class _OTPDialogState extends State<OTPDialog> {
-  final int otpLength = 6;
+  final int otpLength = 4;
   List<TextEditingController> otpControllers = [];
   List<FocusNode> focusNodes = [];
+
+
 
   @override
   void initState() {
@@ -224,7 +248,7 @@ class _OTPDialogState extends State<OTPDialog> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.close),
+                    icon: Icon(Icons.close,size: 25,),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -293,7 +317,7 @@ class _OTPDialogState extends State<OTPDialog> {
               MyButton(
                 borderRadius: 10,
                 elevation: 2,
-                width: 353,
+
                 onPressed: () {
                   String otp = getOtp();
                   Get.toNamed(AppRoutes.passwordRoute);
@@ -320,12 +344,14 @@ class _OTPDialogState extends State<OTPDialog> {
                                   text: "Resend OTP  ",style: MyTextTheme.mediumBCb),
                               TextSpan(
                                   text:  "in  ",style: MyTextTheme.smallBCN),
-      
                             ]
                         ),
                       ),
                     ),
               SizedBox(height: 10),
+              Row(
+              )
+
             ],
           ),
         ),

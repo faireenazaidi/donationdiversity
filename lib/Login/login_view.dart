@@ -3,8 +3,10 @@ import 'dart:math';
 
 import 'package:donationdiversity/Routes/app_routes.dart';
 import 'package:donationdiversity/Widgets/text_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../Widgets/app_color.dart';
@@ -94,21 +96,32 @@ class LoginView extends GetView<LoginController> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Obx(
-                                ()=> Checkbox(
-                                  side: BorderSide(
-                                    color: Colors.white,
-                                  ),
-                                   checkColor: Colors.green,
-                                    activeColor: Colors.transparent,
-                                    value: controller.isChecked.value,
-                                    onChanged: (bool? value) {
+                                ()=>
+                                    GestureDetector(
+                        onTap: () {
+                          controller.isChecked.value = !controller.isChecked.value;
+                          print("VALUE ${controller.isChecked.value}");
+                   },  child: Container(
+                                      width: 22.0,
+                                      height: 22.0,
+                                      decoration: BoxDecoration(
+                                        color: controller.isChecked.value ? Colors.transparent : Colors.transparent,
+                                        border: Border.all(
+                                          color: Colors.white,width: 2.0 // Border color
 
-                                        controller.isChecked.value =! controller.isChecked.value;
-                                        print("VALUE ${value}");
-                                  },
-
-                                  ),
-                                ),
+                                        ),
+                                        borderRadius: BorderRadius.circular(2.0), // Match Checkbox border radius
+                                      ),
+                                      child: controller.isChecked.value
+                                          ? Icon(
+                                        Icons.check,
+                                        size: 18.0,
+                                        color: Colors.green,
+                                      )
+                                          : null,
+                                    ),
+                                    )),
+                                SizedBox(width: 8,),
                                 Text(
                                   "Remember me", style: MyTextTheme.mediumBCN,),
                                Spacer(),
@@ -124,8 +137,8 @@ class LoginView extends GetView<LoginController> {
                             MyButton(
                               borderRadius: 10,
                               elevation: 2,
-                              width: 300,
-                              height: 10,
+                              // width: 300,
+                              // height: 10,
                               onPressed: () {},
                               title: "Sign in",
                               color: AppColor.buttonColor,
@@ -161,25 +174,18 @@ class LoginView extends GetView<LoginController> {
                                   ),
                                 ]
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("If you don't have an account registered,", style: MyTextTheme.mediumWCN),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text("you can",style: MyTextTheme.mediumWCN,),
-                                TextButton(onPressed: (){
-
-                                  Get.toNamed(AppRoutes.signUpRoute);
-
-                                  // Navigate to registration screen or perform action
-                                }, child: Text("Register here!",style: MyTextTheme.largeBCB,))
-                              ],
+                            Align(
+                              alignment: Alignment.topLeft,
+                                child: Text("Don't have an account,", style: MyTextTheme.mediumWCN)),
+                            InkWell(
+                              onTap: (){
+                                Get.toNamed(AppRoutes.signUpRoute);
+                              },
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text("Register here!",style: MyTextTheme.largeBCB,),
+                              ),
                             )
-
-
                           ]
                       ),
                     ),
