@@ -53,6 +53,7 @@ class PrimaryTextField extends StatelessWidget {
     this.prefixIconConstraints,
     this.style,
     this.inputFormatters,
+
   });
 
   @override

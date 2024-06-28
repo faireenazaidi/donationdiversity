@@ -13,6 +13,8 @@ import '../Widgets/primary_text_field.dart';
 import '../Widgets/text_theme.dart';
 
 class PasswordView extends GetView<PasswordController> {
+  get index => null;
+  final PasswordController passwordController = Get.put(PasswordController());
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -78,10 +80,26 @@ class PasswordView extends GetView<PasswordController> {
                      height: 15,
                    ),
 
-                   PrimaryTextField(
-                     prefixIcon: Icon(Icons.lock_outline),
-                     hintText: "Confirm password",
-                   ),
+                   Obx(() => TextFormField(
+                     controller: controller.passwordController,
+                     obscureText: controller.isObscured.value,
+                     decoration: InputDecoration(
+                       labelText: 'Password',
+                       suffixIcon: IconButton(
+                         icon: Icon(
+                           controller.isObscured.value
+                               ? Icons.visibility
+                               : Icons.visibility_off,
+                         ),
+                         onPressed: () {
+                           controller.isObscured.value =
+                           !controller.isObscured.value;
+                         },
+                       ),
+                     ),
+                   )),
+
+
                    SizedBox(
                      height: 20,
                    ),

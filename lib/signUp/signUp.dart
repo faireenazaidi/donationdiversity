@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:donationdiversity/signUp/signUpController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -112,8 +111,11 @@ class SignUpView extends GetView<SignUpController>{
                                     hintText: "Enter Phone Number",
                                       filled: true,
                                       fillColor: Colors.white,
-                                    border: InputBorder.none,
                                     counterText: "",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                      borderSide: BorderSide.none,
+                                    ),
                                   ),
 
                                   initialCountryCode:'IN',
@@ -131,7 +133,10 @@ class SignUpView extends GetView<SignUpController>{
                                     hintText: "Enter Your Email ",
                                     filled: true,
                                     fillColor: Colors.white,
-                                    border: InputBorder.none,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                                      borderSide: BorderSide.none,
+                                    ),
                                     counterText: ""
                                 ),
                               ),
@@ -191,8 +196,8 @@ class _OTPDialogState extends State<OTPDialog> {
   final int otpLength = 4;
   List<TextEditingController> otpControllers = [];
   List<FocusNode> focusNodes = [];
-
-
+  Timer? _timer;
+  int _start=60;
 
   @override
   void initState() {
@@ -201,6 +206,21 @@ class _OTPDialogState extends State<OTPDialog> {
       otpControllers.add(TextEditingController());
       focusNodes.add(FocusNode());
     }
+    startTimer();
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_start == 0) {
+        setState(() {
+          timer.cancel();
+        });
+      } else {
+        setState(() {
+          _start--;
+        });
+      }
+    });
   }
 
   @override
@@ -211,6 +231,7 @@ class _OTPDialogState extends State<OTPDialog> {
     for (var focusNode in focusNodes) {
       focusNode.dispose();
     }
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -344,6 +365,11 @@ class _OTPDialogState extends State<OTPDialog> {
                                     text: "Resend OTP  ",style: MyTextTheme.mediumBCb),
                                 TextSpan(
                                     text:  "in  ",style: MyTextTheme.smallBCN),
+                                WidgetSpan(child: Icon(Icons.timer_outlined,size:15,color: AppColor.buttonColor,)),
+                                TextSpan(
+                                  text: _start > 0 ? '$_start seconds' : 'Resend',
+                                  style: MyTextTheme.smallBCN,
+                                ),
                               ]
                           ),
                         ),
