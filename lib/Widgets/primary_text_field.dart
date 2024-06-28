@@ -31,6 +31,7 @@ class PrimaryTextField extends StatelessWidget {
   final BoxConstraints? suffixIconConstraints;
   final BoxConstraints? prefixIconConstraints;
   final List<TextInputFormatter>? inputFormatters;
+  // final bool? obscureText;
 
 
   const PrimaryTextField({super.key, this.hintText, this.controller,
@@ -53,6 +54,8 @@ class PrimaryTextField extends StatelessWidget {
     this.prefixIconConstraints,
     this.style,
     this.inputFormatters,
+    // this.obscureText,
+
 
   });
 

@@ -80,24 +80,23 @@ class PasswordView extends GetView<PasswordController> {
                      height: 15,
                    ),
 
-                   Obx(() => TextFormField(
-                     controller: controller.passwordController,
-                     obscureText: controller.isObscured.value,
-                     decoration: InputDecoration(
-                       labelText: 'Password',
-                       suffixIcon: IconButton(
+             PrimaryTextField(
+                     prefixIcon: Icon(Icons.lock_outline),
+                     hintText: "Confirm Password",
+                     backgroundColor: Colors.white,
+                     suffixIcon: Obx(
+                           ()=> IconButton(
                          icon: Icon(
-                           controller.isObscured.value
-                               ? Icons.visibility
-                               : Icons.visibility_off,
+                           controller.isPassword.value?
+                           Icons.visibility_off: Icons.visibility,
                          ),
-                         onPressed: () {
-                           controller.isObscured.value =
-                           !controller.isObscured.value;
+                         onPressed: (){
+                           controller.isPassword.value = ! controller.isPassword.value;
+
                          },
                        ),
                      ),
-                   )),
+                   ),
 
 
                    SizedBox(
