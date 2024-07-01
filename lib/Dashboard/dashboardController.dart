@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController{
@@ -7,4 +8,9 @@ class DashboardController extends GetxController{
 "https://media.istockphoto.com/id/1476738412/photo/close-up-digital-golden-coin-and-donate-icon-appear-on-smart-mobile-phone-on-donation.webp?b=1&s=170667a&w=0&k=20&c=0tF0vP6HeR6QJ1eVnkvJansDZMSH7X9ViIy2MC-4xZk=",
     "https://media.istockphoto.com/id/996438996/photo/different-school-supplies-in-a-cardboard-box.webp?b=1&s=170667a&w=0&k=20&c=c4PagcVphgX1a8XuNy6tpOXEkwR34psabetzcegt4P0="
 ];
+
+  final PageController  pageController = PageController();
+
+
+
 }
